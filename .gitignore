@@ -58,3 +58,7 @@ coverage/
 
 # Docs
 docs/build/
+
+# Additional hackathon-safe entries
+history/
+.env.example
