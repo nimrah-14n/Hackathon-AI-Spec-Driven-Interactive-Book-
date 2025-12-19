@@ -1,55 +1,52 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: N/A -> 1.0.0
+Modified principles: None (new constitution)
+Added sections: All sections (new project constitution)
+Removed sections: None
+Templates requiring updates:
+- .specify/templates/plan-template.md ⚠ pending
+- .specify/templates/spec-template.md ⚠ pending
+- .specify/templates/tasks-template.md ⚠ pending
+- .specify/templates/commands/*.md ⚠ pending
+Follow-up TODOs: None
+-->
+
+# AI/Spec-Driven Interactive Book with Integrated RAG Chatbot Constitution
+
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Specification-First Development
+All development starts with clear specifications using Spec-Kit Plus as the source of truth; All technical claims must be implementable and reproducible; Accuracy and technical correctness must be verifiable
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Accuracy and Technical Correctness
+All implementations must be verifiable and technically accurate; No hallucinated technical details; Clear separation of frontend, backend, AI, and data layers
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Reusability Through Subagents and Skills
+Implement reusable intelligence via Claude Code Subagents and Agent Skills documented and reused across chapters; Personalization logic must depend on explicitly collected user background data
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Security-by-Design
+Authentication must use Better Auth as the identity layer; Secure handling of authentication tokens and user data; All API contracts must follow secure practices
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Modularity and Maintainability
+Clean API contracts between services; Consistent terminology throughout the book; Book structure must follow Docusaurus best practices
 
-### [PRINCIPLE_6_NAME]
+### RAG Integrity
+RAG responses must be grounded strictly in indexed book content; Selected-text-only question answering must not hallucinate beyond provided text
 
 
-[PRINCIPLE__DESCRIPTION]
+## Technology Stack Requirements
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Frontend: Docusaurus (React-based); Backend: FastAPI; AI Layer: OpenAI Agents / ChatKit SDKs; Vector Database: Qdrant Cloud (Free Tier); Relational Database: Neon Serverless Postgres; Authentication: Better Auth; Deployment: GitHub Pages
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+All functional requirements must be implemented: AI/Spec-driven book creation, embedded RAG chatbot, user authentication with background collection, content personalization, and Urdu translation support; Quality constraints must be met throughout development
+
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes all other practices; Amendments require documentation and approval; All PRs/reviews must verify compliance with all principles; Complexity must be justified by user requirements
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-15 | **Last Amended**: 2025-12-15

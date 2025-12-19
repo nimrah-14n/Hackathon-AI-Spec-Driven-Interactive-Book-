@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+.next/
+.nuxt/
+
+# Logs
+*.log
+
+# Environment
+.env*
+
+# Docusaurus
+.cache/
+.docusaurus/
+
+# OS
+.DS_Store
+Thumbs.db

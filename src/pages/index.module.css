@@ -1,0 +1,169 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+  color: #2d3748;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.hero__title {
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4a5568;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero__author {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #718096;
+  opacity: 0.8;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.button {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: white;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(66, 153, 225, 0.3);
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+}
+
+.button--outline {
+  background: transparent;
+  border: 2px solid #4299e1;
+  color: #4299e1;
+}
+
+.button--outline:hover {
+  background: #ebf8ff;
+  color: #2c5282;
+}
+
+.modulesSection {
+  padding: 4rem 0;
+  background-color: #f9fafb;
+}
+
+.sectionTitle {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 3rem !important;
+}
+
+.moduleCard {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background-color: white;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.moduleCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4299e1 0%, #48bb78 25%, #ed8936 50%, #ed64a6 75%, #805ad5 100%);
+}
+
+.moduleCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(66, 153, 225, 0.2);
+}
+
+.moduleCard .card__header h3 {
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.moduleCard .card__body p {
+  color: #4a5568;
+}
+
+.clickableCard {
+  cursor: pointer;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroBanner {
+    padding: 3rem 1rem;
+  }
+
+  .moduleCard {
+    margin-bottom: 1rem;
+  }
+}

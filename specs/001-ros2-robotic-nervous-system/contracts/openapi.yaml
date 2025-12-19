@@ -1,0 +1,673 @@
+openapi: 3.0.3
+info:
+  title: ROS 2 Educational Module API
+  description: API for the ROS 2 Educational Module - The Robotic Nervous System
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with background information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/profile:
+    get:
+      summary: Get user profile
+      description: Retrieves the authenticated user's profile information
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /modules/{module_id}/chapters:
+    get:
+      summary: List all chapters in a module
+      description: Retrieves all chapters for a specific module
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The module identifier
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [en, ur]
+            default: en
+          description: Language for content
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /modules/{module_id}/chapters/{chapter_number}:
+    get:
+      summary: Get a specific chapter
+      description: Retrieves a specific chapter by module and chapter number
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The module identifier
+        - name: chapter_number
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The chapter number
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [en, ur]
+            default: en
+          description: Language for content
+      responses:
+        '200':
+          description: Chapter content retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chapters/{chapter_id}/progress:
+    get:
+      summary: Get user progress for a chapter
+      description: Retrieves the authenticated user's progress for a specific chapter
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: chapter_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The chapter ID
+      responses:
+        '200':
+          description: User progress retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Update user progress for a chapter
+      description: Updates the authenticated user's progress for a specific chapter
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: chapter_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The chapter ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProgress'
+      responses:
+        '200':
+          description: Progress updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /rag/query:
+    post:
+      summary: RAG query endpoint
+      description: Submit a query to the RAG system for relevant content
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RagQuery'
+      responses:
+        '200':
+          description: RAG response with relevant content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RagResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /rag/selected-text:
+    post:
+      summary: Selected text RAG query
+      description: Submit a query about specific selected text to the RAG system
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedTextQuery'
+      responses:
+        '200':
+          description: RAG response grounded in selected text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RagResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /subagents/ros-concept-explainer:
+    post:
+      summary: ROS concept explanation
+      description: Get explanation of a ROS concept from the specialized subagent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubagentRequest'
+      responses:
+        '200':
+          description: Concept explanation provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubagentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /subagents/code-walkthrough:
+    post:
+      summary: Code walkthrough assistance
+      description: Get step-by-step explanation of code from the specialized subagent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeWalkthroughRequest'
+      responses:
+        '200':
+          description: Code walkthrough provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubagentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /personalization/profile:
+    get:
+      summary: Get personalization profile
+      description: Retrieve the authenticated user's personalization preferences
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Personalization profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalizationProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      summary: Update personalization profile
+      description: Update the authenticated user's personalization preferences
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonalizationProfile'
+      responses:
+        '200':
+          description: Personalization profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalizationProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /translation/toggle:
+    post:
+      summary: Toggle translation language
+      description: Toggle the content language preference for the authenticated user
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationToggle'
+      responses:
+        '200':
+          description: Translation language updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslationResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UserRegistration:
+      type: object
+      required:
+        - email
+        - password
+        - name
+        - software_background
+        - hardware_background
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email address
+        password:
+          type: string
+          format: password
+          description: User's password (min 8 characters)
+        name:
+          type: string
+          description: User's full name
+        software_background:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+          description: User's software background level
+        hardware_background:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+          description: User's hardware background level
+
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        software_background:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+        hardware_background:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT token for authentication
+        user:
+          $ref: '#/components/schemas/User'
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        module_id:
+          type: string
+        chapter_number:
+          type: integer
+        title:
+          type: string
+        slug:
+          type: string
+        content:
+          type: string
+          description: Chapter content in requested language
+        language:
+          type: string
+          enum: [en, ur]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    UserProgress:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        chapter_id:
+          type: string
+          format: uuid
+        completion_percentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+        time_spent_seconds:
+          type: integer
+        last_accessed:
+          type: string
+          format: date-time
+        bookmarks:
+          type: array
+          items:
+            type: object
+        notes:
+          type: array
+          items:
+            type: object
+
+    UpdateProgress:
+      type: object
+      required:
+        - completion_percentage
+      properties:
+        completion_percentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+        time_spent_seconds:
+          type: integer
+        bookmarks:
+          type: array
+          items:
+            type: object
+        notes:
+          type: array
+          items:
+            type: object
+
+    RagQuery:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question
+        context:
+          type: string
+          description: Additional context for the query
+        chapter_id:
+          type: string
+          format: uuid
+          description: Optional chapter ID to limit search scope
+
+    SelectedTextQuery:
+      type: object
+      required:
+        - selected_text
+        - query
+      properties:
+        selected_text:
+          type: string
+          description: The text that was selected by the user
+        query:
+          type: string
+          description: The user's question about the selected text
+
+    RagResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The answer to the user's question
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              chapter_id:
+                type: string
+                format: uuid
+              chapter_title:
+                type: string
+              content_snippet:
+                type: string
+          description: List of sources used to generate the answer
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Confidence level of the response
+
+    SubagentRequest:
+      type: object
+      required:
+        - concept
+      properties:
+        concept:
+          type: string
+          description: The ROS concept to explain
+        context:
+          type: string
+          description: Additional context for the explanation
+        user_background:
+          $ref: '#/components/schemas/UserBackground'
+
+    CodeWalkthroughRequest:
+      type: object
+      required:
+        - code
+        - explanation_requested
+      properties:
+        code:
+          type: string
+          description: The code to explain
+        explanation_requested:
+          type: string
+          description: What specific aspect of the code to explain
+        user_background:
+          $ref: '#/components/schemas/UserBackground'
+
+    UserBackground:
+      type: object
+      properties:
+        software:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+        hardware:
+          type: string
+          enum: [beginner, intermediate, advanced, none]
+
+    SubagentResponse:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: The explanation provided by the subagent
+        examples:
+          type: array
+          items:
+            type: string
+          description: Examples provided to illustrate the concept
+        next_steps:
+          type: array
+          items:
+            type: string
+          description: Suggested next steps for learning
+
+    PersonalizationProfile:
+      type: object
+      properties:
+        content_complexity_preference:
+          type: string
+          enum: [simplified, balanced, advanced]
+        example_preference:
+          type: string
+          enum: [theoretical, practical, balanced]
+        emphasis_preference:
+          type: string
+          enum: [software, hardware, balanced]
+
+    TranslationToggle:
+      type: object
+      required:
+        - language
+      properties:
+        language:
+          type: string
+          enum: [en, ur]
+          description: The language to switch to
+
+    TranslationResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Confirmation message
+        current_language:
+          type: string
+          enum: [en, ur]
+          description: The currently active language
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unauthorized"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Not Found"
+
+security:
+  - bearerAuth: []
