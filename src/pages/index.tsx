@@ -24,7 +24,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--secondary button--lg margin-left--sm"
-            to="/docs/tutorialSidebar">
+            to="/docs/intro">
             View Modules
           </Link>
         </div>

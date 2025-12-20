@@ -1,0 +1,17 @@
+.blogTagsListPage {
+  background: linear-gradient(135deg, var(--blog-color-light-pink) 0%, var(--blog-color-light-green) 100%);
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.tag {
+  background-color: var(--blog-color-light-yellow) !important;
+  color: #2c3e50 !important;
+  border: 1px solid var(--blog-color-yellow) !important;
+  transition: all 0.3s ease !important;
+}
+
+.tag:hover {
+  background-color: var(--blog-color-yellow) !important;
+  transform: scale(1.05) !important;
+}

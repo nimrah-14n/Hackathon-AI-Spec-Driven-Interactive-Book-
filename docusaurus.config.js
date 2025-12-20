@@ -92,19 +92,19 @@ const config = {
             items: [
               {
                 label: 'Module 1: ROS 2',
-                to: '/docs/module1-ros2/intro',
+                to: '/docs/module1-ros2/01-physical-ai-embodied-intelligence',
               },
               {
                 label: 'Module 2: Digital Twin',
-                to: '/docs/module2-digital-twin/intro',
+                to: '/docs/module2-digital-twin/01-digital-twin-physical-ai',
               },
               {
                 label: 'Module 3: AI Brain',
-                to: '/docs/module3-ai-brain/intro',
+                to: '/docs/module3-ai-brain/01-ai-brain-humanoid',
               },
               {
                 label: 'Module 4: VLA',
-                to: '/docs/module4-vla/intro',
+                to: '/docs/module4-vla/01-vla-paradigm',
               },
             ],
           },

@@ -1,0 +1,12 @@
+.blogArchivePage {
+  background: linear-gradient(135deg, var(--blog-color-light-orange) 0%, var(--blog-color-light-green) 100%);
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.blog-sidebar {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

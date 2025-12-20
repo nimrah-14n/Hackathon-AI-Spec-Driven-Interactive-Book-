@@ -1,0 +1,5 @@
+.blogListPage {
+  background: linear-gradient(135deg, var(--blog-color-light-yellow) 0%, var(--blog-color-light-pink) 100%);
+  padding: 2rem 0;
+  min-height: 100vh;
+}
