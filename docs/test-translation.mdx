@@ -1,0 +1,39 @@
+---
+sidebar_position: 2
+---
+
+import TranslationWrapper from '../src/components/TranslationWrapper';
+
+# Urdu Translation Test
+
+This is a test page to demonstrate the Urdu translation functionality.
+
+## How to Use Translation
+
+To use the translation feature, you can wrap your content with the `TranslationWrapper` component:
+
+```md
+import TranslationWrapper from '@site/src/components/TranslationWrapper'
+
+<TranslationWrapper title="Test Chapter">
+Content to be translated
+</TranslationWrapper>
+```
+
+<TranslationWrapper title="Urdu Translation Demo">
+## Original English Content
+
+This is sample content that will be translated to Urdu when the translation toggle is activated. The system preserves the original content and allows users to switch between English and Urdu as needed.
+
+### Features
+
+- **Toggle Switch**: Easy to use language toggle
+- **Caching**: Translations are cached for performance
+- **Accessibility**: Proper ARIA labels and keyboard navigation
+- **RTL Support**: Proper right-to-left text rendering for Urdu
+- **Original Content Preservation**: Always maintain access to original content
+
+### Example Text
+
+This demonstrates how the translation system works with various types of content including headings, paragraphs, and lists.
+</TranslationWrapper>

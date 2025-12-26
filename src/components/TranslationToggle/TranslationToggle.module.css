@@ -1,0 +1,139 @@
+.translationToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.25rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2rem;
+  position: relative;
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 2rem;
+  background: white;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.toggleButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toggleButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.toggleButton.englishActive {
+  background: white;
+  color: #2c3e50;
+}
+
+.toggleButton.urduActive {
+  background: white;
+  color: #2c3e50;
+}
+
+.toggleText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.switchIcon {
+  margin-left: 0.25rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.languageIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.25rem;
+}
+
+.langBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c3e50;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .translationToggle {
+    margin: 0.5rem 0;
+  }
+
+  .toggleButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-height: 2.2rem;
+  }
+
+  .langBadge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .toggleButton {
+    border: 2px solid #2c3e50;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .toggleButton {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+}

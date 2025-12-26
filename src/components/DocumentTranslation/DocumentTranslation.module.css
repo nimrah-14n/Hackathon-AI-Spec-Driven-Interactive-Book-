@@ -1,0 +1,146 @@
+.documentTranslation {
+  position: relative;
+  margin: 1rem 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  overflow: hidden;
+}
+
+.translationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.resetButton {
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s ease;
+}
+
+.resetButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.translatedContent {
+  position: relative;
+  padding: 1.5rem;
+  min-height: 200px;
+  transition: opacity 0.3s ease;
+}
+
+.translatedContent.translating {
+  opacity: 0.7;
+}
+
+.translatedContent[lang='ur'] {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.loadingSpinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #667eea;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid rgba(102, 126, 234, 0.3);
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.translationFooter {
+  padding: 0.5rem 1rem;
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.translationNote {
+  color: #666;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .translationHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .resetButton {
+    align-self: flex-end;
+  }
+
+  .translatedContent {
+    padding: 1rem;
+  }
+}
+
+/* Urdu-specific styling */
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .documentTranslation {
+    border: 2px solid #000;
+  }
+
+  .resetButton {
+    border: 2px solid #000;
+    background: white;
+    color: #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .translatedContent {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+}

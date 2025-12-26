@@ -1,0 +1,225 @@
+/* Auth Modal Styles */
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  position: relative;
+  background: linear-gradient(135deg, #fffefb 0%, #fefefe 100%);
+  border: 1px solid #ffe5b4;
+}
+
+.auth-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffe5b4;
+}
+
+.auth-modal-header h2 {
+  color: #ff6b6b;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.auth-modal-close {
+  background: #ffe0e0;
+  color: #ff6b6b;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.auth-modal-close:hover {
+  background: #ff6b6b;
+  color: white;
+  transform: scale(1.1);
+}
+
+.auth-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #ff6b6b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  padding: 14px 16px;
+  border: 1px solid #ffd54f;
+  border-radius: 12px;
+  font-size: 16px;
+  background: white;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ffb74d;
+  box-shadow: 0 0 0 3px rgba(255, 183, 77, 0.2);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.radio-option:hover {
+  border-color: #ffd54f;
+  background: #fff8e1;
+}
+
+.radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-label {
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label {
+  color: #ff6b6b;
+  font-weight: 500;
+}
+
+.auth-error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid #c62828;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.auth-submit-btn {
+  background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
+  color: #d84315;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffab91 0%, #ff8a65 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 142, 101, 0.3);
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-modal-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ffe5b4;
+  text-align: center;
+}
+
+.auth-modal-footer p {
+  color: #757575;
+  margin: 0;
+  font-size: 14px;
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.auth-toggle-btn:hover {
+  color: #d84315;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .auth-modal {
+    width: 95%;
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .auth-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .form-group input {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents zoom on mobile */
+  }
+}

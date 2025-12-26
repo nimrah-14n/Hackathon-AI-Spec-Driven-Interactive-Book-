@@ -1,37 +1,48 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+from .api.v1.chat import router as chat_router
+from .config.settings import settings
+from .config.database import init_db
+import logging
 
-# Load environment variables
-load_dotenv()
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-# Import API routers
-from backend.src.api import auth, chapters
+# Import existing API routers
+from .api import auth, chapters
 
+# Create FastAPI app
 app = FastAPI(
-    title="AI/Spec-Driven Interactive Book API",
-    description="Backend API for the ROS 2 Educational Module and other modules",
-    version="1.0.0"
+    title=settings.app_title,
+    version=settings.app_version,
+    debug=settings.debug,
 )
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["*"],  # In production, specify your frontend domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include API routes
+# Initialize database tables on startup
+@app.on_event("startup")
+def on_startup():
+    init_db()
+    logger.info("Database initialized successfully")
+
+# Include API routers
+app.include_router(chat_router)  # RAG chatbot API
 app.include_router(auth.router, prefix="/auth", tags=["authentication"])
 app.include_router(chapters.router, prefix="/chapters", tags=["chapters"])
-# Additional routers will be added as they're implemented
 
 @app.get("/")
 def read_root():
-    return {"message": "AI/Spec-Driven Interactive Book Backend API"}
+    return {"message": "RAG Chatbot API", "version": settings.app_version}
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "service": "backend-api"}
+    return {"status": "healthy", "service": "RAG Chatbot API"}

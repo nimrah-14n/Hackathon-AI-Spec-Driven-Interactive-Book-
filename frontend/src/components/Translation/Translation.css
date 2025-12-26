@@ -1,0 +1,56 @@
+.urdu-toggle-container {
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.urdu-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background-color: #f8fafc;
+  color: #334155;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.urdu-toggle-btn:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.urdu-toggle-btn.urdu-active {
+  background-color: #fef3c7; /* Light yellow background */
+  border-color: #f59e0b; /* Amber border */
+  color: #92400e; /* Amber text color */
+}
+
+.urdu-toggle-btn.urdu-active:hover {
+  background-color: #fde68a; /* Slightly lighter yellow on hover */
+}
+
+.urdu-toggle-icon {
+  font-size: 1.125rem;
+}
+
+.urdu-toggle-text {
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .urdu-toggle-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .urdu-toggle-icon {
+    font-size: 1rem;
+  }
+}

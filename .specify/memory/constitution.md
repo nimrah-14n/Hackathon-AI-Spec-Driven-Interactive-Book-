@@ -1,7 +1,7 @@
 <!-- SYNC IMPACT REPORT
-Version change: N/A -> 1.0.0
-Modified principles: None (new constitution)
-Added sections: All sections (new project constitution)
+Version change: 1.0.0 -> 1.1.0
+Modified principles: Updated to reflect Embedded RAG Chatbot for Spec-Driven Interactive AI Book requirements
+Added sections: Chatbot Behavior Rules, RAG Constraints, UI Principles, AI-Native Spec-Driven Robotics Learning enhancements
 Removed sections: None
 Templates requiring updates:
 - .specify/templates/plan-template.md ⚠ pending
@@ -11,7 +11,7 @@ Templates requiring updates:
 Follow-up TODOs: None
 -->
 
-# AI/Spec-Driven Interactive Book with Integrated RAG Chatbot Constitution
+# Embedded RAG Chatbot for Spec-Driven Interactive AI Book Constitution
 
 
 ## Core Principles
@@ -19,26 +19,58 @@ Follow-up TODOs: None
 ### Specification-First Development
 All development starts with clear specifications using Spec-Kit Plus as the source of truth; All technical claims must be implementable and reproducible; Accuracy and technical correctness must be verifiable
 
-### Accuracy and Technical Correctness
-All implementations must be verifiable and technically accurate; No hallucinated technical details; Clear separation of frontend, backend, AI, and data layers
+### Preservation of Existing Systems
+Do not break existing Docusaurus book or deployment; Changes must be incremental and reversible; Follow Spec-Driven Development strictly
 
-### Reusability Through Subagents and Skills
-Implement reusable intelligence via Claude Code Subagents and Agent Skills documented and reused across chapters; Personalization logic must depend on explicitly collected user background data
+### Clean Separation of Concerns
+Backend and frontend must be cleanly separated; Clear separation of frontend, backend, AI, and data layers; Clean API contracts between services
 
 ### Security-by-Design
-Authentication must use Better Auth as the identity layer; Secure handling of authentication tokens and user data; All API contracts must follow secure practices
+All secrets must use environment variables; Secure handling of authentication tokens and user data; All API contracts must follow secure practices; Deployment must not fail due to missing data
 
 ### Modularity and Maintainability
-Clean API contracts between services; Consistent terminology throughout the book; Book structure must follow Docusaurus best practices
+Consistent terminology throughout the book; Book structure must follow Docusaurus best practices; Quality constraints must be met throughout development
 
-### RAG Integrity
-RAG responses must be grounded strictly in indexed book content; Selected-text-only question answering must not hallucinate beyond provided text
+
+## Chatbot Behavior Rules
+
+### Respectful and Professional Interaction
+Responses must be respectful, polite, and professional; Tone should be friendly, calm, and helpful; No hallucinations or guessing
+
+### Context-Aware Response Handling
+If information is not found in book context, respond: "I'm sorry, I couldn't find this information in the book content."; Maintain respectful academic tone; Avoid hallucination; Prefer clarity over verbosity
+
+
+## RAG Constraints
+
+### Strict Context Adherence
+Chatbot must answer ONLY from book content; Must support "Answer from selected text only" mode; Must refuse answering outside provided context; RAG responses must be grounded strictly in indexed book content; Selected-text-only question answering must not hallucinate beyond provided text
+
+
+## UI Principles
+
+### Clean and Accessible Design
+Clean, minimal, readable chatbot UI; Accessible font sizes and contrast; Non-intrusive integration with Docusaurus book
+
+### Visual Aesthetics
+Use soft pastel colors (light yellow, orange, pink); Smooth animations (fade / slide)
 
 
 ## Technology Stack Requirements
 
 Frontend: Docusaurus (React-based); Backend: FastAPI; AI Layer: OpenAI Agents / ChatKit SDKs; Vector Database: Qdrant Cloud (Free Tier); Relational Database: Neon Serverless Postgres; Authentication: Better Auth; Deployment: GitHub Pages
 
+
+## AI-Native Spec-Driven Robotics Learning Book Principles
+
+### Educational Excellence
+Spec-driven development; Educational correctness; Safe and respectful AI responses
+
+### Cultural Inclusivity
+Cultural inclusivity (Urdu support); Support for multilingual content delivery
+
+### Intelligence Modularity
+Modular reusable intelligence via subagents; Hackathon-safe deployment
 
 ## Development Workflow
 
@@ -49,4 +81,4 @@ All functional requirements must be implemented: AI/Spec-driven book creation, e
 
 This Constitution supersedes all other practices; Amendments require documentation and approval; All PRs/reviews must verify compliance with all principles; Complexity must be justified by user requirements
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-15 | **Last Amended**: 2025-12-15
+**Version**: 1.1.0 | **Ratified**: 2025-12-15 | **Last Amended**: 2025-12-22
