@@ -60,5 +60,5 @@ coverage/
 docs/build/
 
 # Additional hackathon-safe entries
-history/
+# history/  # Uncommented to include project history in repository
 .env.example
