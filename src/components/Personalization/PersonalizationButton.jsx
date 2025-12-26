@@ -37,6 +37,21 @@ const PersonalizationButton = ({ chapterId, userId = null }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event) => {
+      const personalizationContainer = document.querySelector('.personalization-container');
+      if (showAuthModal && personalizationContainer && !personalizationContainer.contains(event.target)) {
+        setShowAuthModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showAuthModal]);
+
   const handleAuthSuccess = (userData) => {
     setIsAuthenticated(true);
     setUser(userData);
@@ -63,55 +78,60 @@ const PersonalizationButton = ({ chapterId, userId = null }) => {
     return null;
   }
 
-  if (!isAuthenticated) {
-    return (
-      <div className="personalization-container">
-        <button
-          className="personalization-btn login-prompt"
-          onClick={openAuthModal}
-        >
-          <span className="btn-icon">👤</span>
-          <span>Login for Personalized Content</span>
-        </button>
-
-        <AuthModal
-          isOpen={showAuthModal}
-          onClose={closeAuthModal}
-          onAuthSuccess={handleAuthSuccess}
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="personalization-container">
-      <div className="personalization-header">
-        <button className="personalization-btn user-info" onClick={() => {}}>
-          <span className="btn-icon">👤</span>
-          <span className="user-name">{user?.name || 'User'}</span>
-          <span className="user-background">
-            {user?.software_background && user.hardware_background
-              ? `${user.software_background}/${user.hardware_background}`
-              : 'Background Set'}
-          </span>
-        </button>
-        <button className="logout-btn" onClick={handleLogout} title="Logout">
-          <span>Logout</span>
-        </button>
-      </div>
+      <button
+        className="personalization-btn"
+        onClick={() => {
+          if (isAuthenticated) {
+            // Toggle visibility of options for authenticated users
+            setShowAuthModal(!showAuthModal);
+          } else {
+            // Open auth modal for non-authenticated users
+            openAuthModal();
+          }
+        }}
+        title={isAuthenticated ? 'View Profile Options' : 'Sign In / Sign Up'}
+      >
+        <span className="btn-icon">{isAuthenticated ? '👤' : '🔒'}</span>
+      </button>
 
-      <div className="personalization-options">
-        <div className="option-card">
-          <h4>Content Preferences</h4>
-          <p>Your background: {user?.software_background} software, {user?.hardware_background} hardware</p>
-          <p>Content will be tailored to your experience level.</p>
-        </div>
+      {/* Auth Modal for login/signup */}
+      <AuthModal
+        isOpen={showAuthModal && !isAuthenticated}
+        onClose={closeAuthModal}
+        onAuthSuccess={handleAuthSuccess}
+      />
 
-        <div className="option-card">
-          <h4>Learning Path</h4>
-          <p>Based on your background, we recommend starting with fundamentals.</p>
+      {/* Dropdown options for authenticated users */}
+      {isAuthenticated && showAuthModal && (
+        <div className="personalization-options">
+          <div className="personalization-header">
+            <div className="user-info">
+              <span className="user-name">{user?.name || 'User'}</span>
+              <span className="user-background">
+                {user?.software_background && user.hardware_background
+                  ? `${user.software_background}/${user.hardware_background}`
+                  : 'Background Set'}
+              </span>
+            </div>
+            <button className="logout-btn" onClick={handleLogout} title="Logout">
+              <span>Logout</span>
+            </button>
+          </div>
+
+          <div className="option-card">
+            <h4>Content Preferences</h4>
+            <p>Your background: {user?.software_background} software, {user?.hardware_background} hardware</p>
+            <p>Content tailored to your experience level.</p>
+          </div>
+
+          <div className="option-card">
+            <h4>Learning Path</h4>
+            <p>Based on your background, personalized recommendations.</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
