@@ -1,0 +1,223 @@
+/* Personalization Button Styles */
+.personalization-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+}
+
+.personalization-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.personalization-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border: 1px solid #ffccbc;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
+  color: #d84315;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.personalization-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 142, 101, 0.3);
+}
+
+.login-prompt {
+  justify-content: center;
+  width: 100%;
+}
+
+.user-info {
+  gap: 8px;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-background {
+  font-size: 12px;
+  background: rgba(216, 67, 21, 0.1);
+  color: #d84315;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(216, 67, 21, 0.2);
+}
+
+.logout-btn {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+  border-radius: 18px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #c62828;
+  color: white;
+}
+
+.personalization-options {
+  display: grid;
+  gap: 16px;
+}
+
+.option-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.option-card h4 {
+  margin: 0 0 8px 0;
+  color: #ff6b6b;
+  font-size: 16px;
+}
+
+.option-card p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Auth Modal Styles for the simplified version */
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  position: relative;
+  background: linear-gradient(135deg, #fffefb 0%, #fefefe 100%);
+  border: 1px solid #ffe5b4;
+}
+
+.auth-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffe5b4;
+}
+
+.auth-modal-header h2 {
+  color: #ff6b6b;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.auth-modal-close {
+  background: #ffe0e0;
+  color: #ff6b6b;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.auth-modal-close:hover {
+  background: #ff6b6b;
+  color: white;
+  transform: scale(1.1);
+}
+
+.auth-modal-content {
+  margin-bottom: 24px;
+}
+
+.auth-modal-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.auth-modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn.primary {
+  background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
+  color: #d84315;
+}
+
+.auth-btn.primary:hover {
+  background: linear-gradient(135deg, #ffab91 0%, #ff8a65 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 142, 101, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .personalization-container {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .personalization-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .personalization-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logout-btn {
+    align-self: center;
+    width: auto;
+  }
+}

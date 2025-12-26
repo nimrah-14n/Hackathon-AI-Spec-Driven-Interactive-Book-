@@ -1,0 +1,41 @@
+.chapter-personalization-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+}
+
+.chapter-personalization-header {
+  margin-bottom: 16px;
+}
+
+.chapter-personalization-header h3 {
+  color: #ff6b6b;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chapter-personalization-header p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chapter-personalization-container {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .chapter-personalization-header h3 {
+    font-size: 16px;
+  }
+
+  .chapter-personalization-header p {
+    font-size: 13px;
+  }
+}
