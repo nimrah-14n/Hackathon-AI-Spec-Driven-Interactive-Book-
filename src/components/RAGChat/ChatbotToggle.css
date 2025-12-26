@@ -55,6 +55,56 @@
   font-size: 16px;
 }
 
+.chatbot-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.language-toggle-btn {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.language-toggle-btn:hover {
+  background: #bbdefb;
+  transform: translateY(-1px);
+}
+
+.language-toggle-btn.urdu-active {
+  background: #1565c0;
+  color: white;
+  border-color: #0d47a1;
+}
+
+.profile-btn {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-btn:hover {
+  background: #bbdefb;
+  transform: translateY(-1px);
+}
+
 .chatbot-close {
   background: none;
   border: none;
@@ -126,6 +176,12 @@
   font-size: 14px;
   line-height: 1.4;
   max-width: 100%;
+}
+
+.response-badge {
+  margin-right: 8px;
+  font-size: 16px;
+  vertical-align: middle;
 }
 
 .user-message .message-text {

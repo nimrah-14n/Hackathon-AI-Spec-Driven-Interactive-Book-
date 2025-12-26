@@ -3,7 +3,7 @@ import { useChatbot } from './ChatbotProvider';
 import './ChatbotToggle.css';
 
 const ChatbotToggle = () => {
-  const { isOpen, toggleChat, messages, isLoading, sendMessage } = useChatbot();
+  const { isOpen, toggleChat, messages, isLoading, sendMessage, languagePreference, toggleLanguage } = useChatbot();
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
@@ -42,9 +42,41 @@ const ChatbotToggle = () => {
     <div className="chatbot-container">
       <div className="chatbot-header">
         <div className="chatbot-title">AI Assistant</div>
-        <button className="chatbot-close" onClick={toggleChat}>
-          ×
-        </button>
+        <div className="chatbot-controls">
+          <button
+            className={`language-toggle-btn ${languagePreference === 'ur' ? 'urdu-active' : 'english-active'}`}
+            onClick={toggleLanguage}
+            title={languagePreference === 'en' ? 'Switch to Urdu' : 'Switch to English'}
+          >
+            <span className="urdu-toggle-icon">🌐</span>
+            <span className="urdu-toggle-text">{languagePreference === 'en' ? 'EN' : 'UR'}</span>
+          </button>
+          <button
+            className="profile-btn"
+            onClick={() => {
+              // Check if user is authenticated
+              const token = localStorage.getItem('authToken');
+              if (token) {
+                // If authenticated, show user info tooltip or profile options
+                const user = JSON.parse(localStorage.getItem('user') || '{}');
+                alert(`Signed in as: ${user.name || 'User'}\nEmail: ${user.email || ''}\n\nClick OK to continue chatting.`);
+              } else {
+                // If not authenticated, show a login prompt
+                if (confirm('Sign in to personalize your experience and save your chat history. Would you like to sign in now?')) {
+                  // In a real app, we would open an auth modal here
+                  console.log('Opening auth modal...');
+                  // You could trigger a login modal here
+                }
+              }
+            }}
+            title={localStorage.getItem('authToken') ? 'View Profile' : 'Sign In'}
+          >
+            <span className="profile-icon">{localStorage.getItem('authToken') ? '👤' : '🔒'}</span>
+          </button>
+          <button className="chatbot-close" onClick={toggleChat}>
+            ×
+          </button>
+        </div>
       </div>
 
       <div id="chat-messages-container" className="chatbot-messages">
@@ -60,7 +92,44 @@ const ChatbotToggle = () => {
               className={`chatbot-message ${message.sender}-message`}
             >
               <div className="message-content">
-                {message.sender === 'bot' && <span className="bot-icon">🤖</span>}
+                {message.sender === 'bot' && (
+                  <>
+                    <span className="response-badge">
+                      {(() => {
+                        const text = message.text;
+                        // Check if the response mentions book content
+                        if (text.toLowerCase().includes('book') ||
+                            text.toLowerCase().includes('content') ||
+                            text.toLowerCase().includes('chapter') ||
+                            text.toLowerCase().includes('page') ||
+                            text.toLowerCase().includes('document') ||
+                            text.toLowerCase().includes('provided context')) {
+                          return '📘'; // Book Answer
+                        }
+                        // Check if the response is general AI/Robotics knowledge
+                        else if (text.toLowerCase().includes('ai') ||
+                                 text.toLowerCase().includes('robotics') ||
+                                 text.toLowerCase().includes('machine learning') ||
+                                 text.toLowerCase().includes('ml') ||
+                                 text.toLowerCase().includes('neural network') ||
+                                 text.toLowerCase().includes('algorithm') ||
+                                 text.toLowerCase().includes('i don\'t have that information in the book') ||
+                                 text.toLowerCase().includes('couldn\'t find this information in the book')) {
+                          return '🤖'; // AI Knowledge
+                        }
+                        // If current language is Urdu, show Urdu badge
+                        else if (languagePreference === 'ur') {
+                          return '🌐'; // Urdu
+                        }
+                        // Default to AI knowledge
+                        else {
+                          return '🤖'; // AI Knowledge
+                        }
+                      })()}
+                    </span>
+                    <span className="bot-icon">🤖</span>
+                  </>
+                )}
                 <div className="message-text">
                   {message.text}
                   {message.sources && message.sources.length > 0 && (

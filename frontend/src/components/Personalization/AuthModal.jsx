@@ -32,7 +32,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
     setError('');
 
     try {
-      const endpoint = isLogin ? '/auth/login' : '/auth/register';
+      const endpoint = isLogin ? 'http://localhost:8000/auth/login' : 'http://localhost:8000/auth/register';
       const requestBody = isLogin
         ? { email: formData.email, password: formData.password }
         : {

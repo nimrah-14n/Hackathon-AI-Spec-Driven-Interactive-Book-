@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AuthModal from './AuthModal';
 import './PersonalizationButton.css';
 
 const PersonalizationButton = ({ chapterId, userId = null }) => {
@@ -73,30 +74,11 @@ const PersonalizationButton = ({ chapterId, userId = null }) => {
           <span>Login for Personalized Content</span>
         </button>
 
-        {showAuthModal && (
-          <div className="auth-modal-overlay" onClick={closeAuthModal}>
-            <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
-              <div className="auth-modal-header">
-                <h2>Sign In to Personalize</h2>
-                <button className="auth-modal-close" onClick={closeAuthModal}>×</button>
-              </div>
-              <div className="auth-modal-content">
-                <p>Log in or create an account to get personalized content based on your background.</p>
-                <div className="auth-modal-actions">
-                  <button
-                    className="auth-btn primary"
-                    onClick={() => {
-                      closeAuthModal();
-                      openAuthModal(); // This will open the full auth modal
-                    }}
-                  >
-                    Continue to Sign In
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={closeAuthModal}
+          onAuthSuccess={handleAuthSuccess}
+        />
       </div>
     );
   }

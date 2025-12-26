@@ -15,11 +15,16 @@ export const ChatbotProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
+  const [languagePreference, setLanguagePreference] = useState('en'); // 'en' for English, 'ur' for Urdu
 
   // Function to send message to backend
-  const sendMessage = async (message) => {
+  const sendMessage = async (message, contextMode = 'book_wide', selectedText = null) => {
     setIsLoading(true);
     try {
+      // Get user ID from localStorage if authenticated
+      const storedUser = localStorage.getItem('user');
+      const userId = storedUser ? JSON.parse(storedUser).id : null;
+
       // Add user message to chat
       const userMessage = { id: Date.now(), text: message, sender: 'user', timestamp: new Date() };
       setMessages(prev => [...prev, userMessage]);
@@ -32,7 +37,10 @@ export const ChatbotProvider = ({ children }) => {
         },
         body: JSON.stringify({
           message: message,
-          context_mode: 'book_wide'
+          context_mode: contextMode,
+          selected_text: selectedText,
+          language_preference: languagePreference,
+          user_id: userId
         }),
       });
 
@@ -79,6 +87,14 @@ export const ChatbotProvider = ({ children }) => {
     setMessages([]);
   };
 
+  const toggleLanguage = () => {
+    setLanguagePreference(prev => prev === 'en' ? 'ur' : 'en');
+  };
+
+  const setLanguage = (lang) => {
+    setLanguagePreference(lang);
+  };
+
   const value = {
     isOpen,
     setIsOpen,
@@ -88,6 +104,9 @@ export const ChatbotProvider = ({ children }) => {
     sendMessage,
     toggleChat,
     clearChat,
+    languagePreference,
+    toggleLanguage,
+    setLanguage,
   };
 
   return (

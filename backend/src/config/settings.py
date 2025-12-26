@@ -28,8 +28,8 @@ class Settings(Settings):
 
     # Feature Flags
     selected_text_mode_enabled: bool = True
-    auth_enabled: bool = False
-    personalization_enabled: bool = False
+    auth_enabled: bool = True
+    personalization_enabled: bool = True
     urdu_translation_enabled: bool = True  # Enable Urdu translation feature
 
     model_config = {
