@@ -32,7 +32,12 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
     setError('');
 
     try {
-      const endpoint = isLogin ? 'http://localhost:8000/auth/login' : 'http://localhost:8000/auth/register';
+      // Determine API base URL based on environment
+      const apiBaseUrl = process.env.NODE_ENV === 'production'
+        ? '' // Use relative path in production
+        : 'http://localhost:8000'; // Use full URL in development
+
+      const endpoint = `${apiBaseUrl}${isLogin ? '/auth/login' : '/auth/register'}`;
       const requestBody = isLogin
         ? { email: formData.email, password: formData.password }
         : {

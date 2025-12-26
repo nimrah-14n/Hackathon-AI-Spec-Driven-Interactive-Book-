@@ -12,7 +12,12 @@ const PersonalizationButton = ({ chapterId, userId = null }) => {
     // Check if authentication is enabled by fetching feature flags
     const checkAuthFeatureFlag = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/feature-flags');
+        // Determine API base URL based on environment
+        const apiBaseUrl = process.env.NODE_ENV === 'production'
+          ? '' // Use relative path in production
+          : 'http://localhost:8000'; // Use full URL in development
+
+        const response = await fetch(`${apiBaseUrl}/api/v1/feature-flags`);
         const featureFlags = await response.json();
         setAuthEnabled(featureFlags.auth || false);
       } catch (error) {

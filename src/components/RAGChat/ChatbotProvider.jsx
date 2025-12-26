@@ -29,8 +29,13 @@ export const ChatbotProvider = ({ children }) => {
       const userMessage = { id: Date.now(), text: message, sender: 'user', timestamp: new Date() };
       setMessages(prev => [...prev, userMessage]);
 
+      // Determine API base URL based on environment
+      const apiBaseUrl = process.env.NODE_ENV === 'production'
+        ? '' // Use relative path in production
+        : 'http://localhost:8000'; // Use full URL in development
+
       // Call backend API
-      const response = await fetch('http://localhost:8000/api/v1/chat', {
+      const response = await fetch(`${apiBaseUrl}/api/v1/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
