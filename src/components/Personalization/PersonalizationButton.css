@@ -9,27 +9,39 @@
 }
 
 .personalization-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
-  color: #d84315;
-  border: 1px solid rgba(255, 142, 101, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(255, 142, 101, 0.2);
-  font-size: 14px;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
   position: relative;
   text-decoration: none;
-  padding: 0;
+  white-space: nowrap;
+  height: 36px;
 }
 
 .personalization-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(255, 142, 101, 0.4);
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-1px);
+}
+
+.btn-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-name {
+  font-weight: 600;
+  margin-left: 4px;
 }
 
 .login-prompt {
@@ -73,13 +85,13 @@
 .personalization-options {
   display: grid;
   gap: 16px;
-  margin-top: 10px;
+  margin-top: 8px;
   background: white;
   padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: absolute;
-  top: 50px;
+  top: 44px;
   right: 0;
   min-width: 280px;
   z-index: 1001;

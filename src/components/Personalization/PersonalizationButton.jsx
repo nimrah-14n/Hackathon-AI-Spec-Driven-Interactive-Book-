@@ -98,7 +98,14 @@ const PersonalizationButton = ({ chapterId, userId = null }) => {
         }}
         title={isAuthenticated ? 'View Profile Options' : 'Sign In / Sign Up'}
       >
-        <span className="btn-icon">{isAuthenticated ? '👤' : '🔒'}</span>
+        {isAuthenticated ? (
+          <span className="btn-text">
+            <span className="btn-icon">👤</span>
+            <span className="user-name">{user?.name || 'User'}</span>
+          </span>
+        ) : (
+          <span className="btn-text">Sign In</span>
+        )}
       </button>
 
       {/* Auth Modal for login/signup */}
