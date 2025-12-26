@@ -7,11 +7,20 @@ import PersonalizationButton from '../components/Personalization/Personalization
 export default function Layout(props) {
   return (
     <ChatbotProvider>
-      <OriginalLayout {...props}>
-        {props.children}
-        <PersonalizationButton />
+      <div style={{ position: 'relative', minHeight: '100vh' }}>
+        <OriginalLayout {...props}>
+          {props.children}
+        </OriginalLayout>
+        <div style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '7rem',  // Positioned to the left of where GitHub button appears
+          zIndex: 1000
+        }}>
+          <PersonalizationButton />
+        </div>
         <ChatbotToggle />
-      </OriginalLayout>
+      </div>
     </ChatbotProvider>
   );
 }

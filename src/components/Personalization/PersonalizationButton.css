@@ -1,9 +1,7 @@
-/* Personalization Button Styles - Fixed position like chatbot toggle */
+/* Personalization Button Styles - Navbar item */
 .personalization-container {
-  position: fixed;
-  top: 20px;
-  right: 90px; /* Position it to the left of the chatbot toggle */
-  z-index: 1000;
+  display: flex;
+  align-items: center;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -14,17 +12,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
   color: #d84315;
-  border: none;
+  border: 1px solid rgba(255, 142, 101, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 142, 101, 0.3);
-  font-size: 20px;
+  box-shadow: 0 2px 4px rgba(255, 142, 101, 0.2);
+  font-size: 14px;
   position: relative;
+  text-decoration: none;
+  padding: 0;
 }
 
 .personalization-btn:hover {
@@ -79,10 +79,11 @@
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 60px;
+  top: 50px;
   right: 0;
   min-width: 280px;
   z-index: 1001;
+  border: 1px solid #e0e0e0;
 }
 
 .personalization-header {
