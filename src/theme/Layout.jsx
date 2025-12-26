@@ -14,7 +14,7 @@ export default function Layout(props) {
         <div style={{
           position: 'absolute',
           top: '1rem',
-          right: '7rem',  // Positioned to the left of where GitHub button appears
+          right: '120px',  // Positioned to the left of GitHub button with proper spacing
           zIndex: 1000
         }}>
           <PersonalizationButton />

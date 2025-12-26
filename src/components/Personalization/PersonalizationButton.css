@@ -6,6 +6,7 @@
   border: none;
   box-shadow: none;
   min-width: auto;
+  margin-left: 0.5rem;  /* Add some spacing from other elements */
 }
 
 .personalization-btn {
